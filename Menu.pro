@@ -15,7 +15,8 @@ SOURCES += main.cpp \
     cmenupage.cpp \
     cwidget.cpp \
     cwidgetstatus.cpp \
-    cwidgetnumber.cpp
+    cwidgetnumber.cpp \
+    cwidgetmenu.cpp
 
 LIBS += -lncurses
 
@@ -25,4 +26,5 @@ HEADERS += \
     cmenupage.h \
     cwidget.h \
     cwidgetstatus.h \
-    cwidgetnumber.h
+    cwidgetnumber.h \
+    cwidgetmenu.h

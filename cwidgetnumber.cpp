@@ -1,13 +1,14 @@
 #include "cwidgetnumber.h"
 
-CWidgetNumber::CWidgetNumber() : m_intNumber(46)
+CWidgetNumber::CWidgetNumber()
 {
 
 }
 
-void CWidgetNumber::initWidget(void)
+void CWidgetNumber::initWidget(const string menuName, const string menuWidget, CMenuPage *nextMenu)
 {
-
+    m_sMenuName = menuName;
+    m_intNumber = atoi(menuWidget.c_str());
 }
 
 void CWidgetNumber::leftAction(void)
@@ -22,9 +23,19 @@ void CWidgetNumber::rightAction(void)
         --m_intNumber;
 }
 
-QString CWidgetNumber::getText(void)
+string CWidgetNumber::getText(void)
 {
-    QString result = QString::number(m_intNumber);
-    return result;
+    stringstream ss;
+    string result;
+
+    ss << m_intNumber;
+    result << ss;
+
+    return m_sMenuName + result;
+}
+
+bool CWidgetNumber::isNewMenu(void)
+{
+    return FALSE;
 }
 

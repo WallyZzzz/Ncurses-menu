@@ -29,13 +29,13 @@ string CWidgetNumber::getText(void)
     string result;
 
     ss << m_intNumber;
-    result << ss;
+    ss >> result;
 
     return m_sMenuName + result;
 }
 
-bool CWidgetNumber::isNewMenu(void)
+CMenuPage *CWidgetNumber::isNewMenu(void)
 {
-    return FALSE;
+    return NULL;
 }
 

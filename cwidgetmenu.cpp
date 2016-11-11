@@ -11,7 +11,12 @@ void CWidgetMenu::initWidget(const string menuName, const string menuWidget, CMe
     m_pNextMenu = nextMenu;
 }
 
-bool CWidgetMenu::isNewMenu(void)
+CMenuPage *CWidgetMenu::isNewMenu(void)
 {
-    return TRUE;
+    return m_pNextMenu;
+}
+
+string CWidgetMenu::getText(void)
+{
+    return m_sMenuName + ">>";
 }

@@ -38,15 +38,15 @@ void CMenuCtrl::moveRight(void)
 
 void CMenuCtrl::enterMenu(void)
 {
-    int index = m_myMenuP.at(m_intCurrentMenu)->isNewMenu();
-    if(index >= 0)
-    {
-        preMenu.push(m_myMenuP.at(m_intCurrentMenu));
-        m_myMenuP.at(m_intCurrentMenu)->clear();
-        m_intCurrentMenu = index;
+//    int index = m_myMenuP.at(m_intCurrentMenu)->isNewMenu();
+//    if(index >= 0)
+//    {
+//        preMenu.push(m_myMenuP.at(m_intCurrentMenu));
+//        m_myMenuP.at(m_intCurrentMenu)->clear();
+//        m_intCurrentMenu = index;
 
-        show();
-    }
+//        show();
+//    }
 }
 
 void CMenuCtrl::show(void)

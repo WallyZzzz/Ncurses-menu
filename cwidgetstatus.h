@@ -14,7 +14,7 @@ public:
     void rightAction(void);
     void initWidget(const string menuName, const string menuString, CMenuPage *nextMenu);
     string getText(void);
-    bool isNewMenu(void);
+    CMenuPage *isNewMenu(void);
 private:
     bool m_boolStatus;
 };

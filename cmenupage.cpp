@@ -1,4 +1,5 @@
 #include "cmenupage.h"
+#include "cwidget.h"
 
 
 int CMenuPage::m_intMenuX = 12;
@@ -17,9 +18,9 @@ void CMenuPage::initMenu(int width, int height)
     m_intStartX = (COLS - m_intWidth)/2;
     m_intStartY = (LINES - m_intHeight)/2;
 
-    myWin = newwin(m_intHeight,m_intWidth,m_intStartY,m_intStartX);
+    myWin = newwin(m_intHeight, m_intWidth, m_intStartY, m_intStartX);
 
-    m_intCurrentY = m_intMenuY + 1;
+    m_intCurrentY = m_intMenuY;
 }
 
 void CMenuPage::bindNewWidget(CWidget *newWidget)
@@ -29,7 +30,7 @@ void CMenuPage::bindNewWidget(CWidget *newWidget)
 
 void CMenuPage::setCurrentY(void)
 {
-    mvwaddch(myWin,m_intCurrentY,m_intMenuX - 1,'#');
+    mvwaddch(myWin, m_intCurrentY, m_intMenuX - 2, '#');
 }
 
 void CMenuPage::show(void)
@@ -51,12 +52,12 @@ void CMenuPage::showWidget(void)
 {
    vector<CWidget*>::iterator itWidget;
    for(itWidget = m_vWidget.begin(); itWidget != m_vWidget.end(); itWidget++)
-       mvwprintw(myWin, m_intMenuY, m_intMenuX, *itWidget->getText());
+       mvwprintw(myWin, m_intMenuY + (itWidget - m_vWidget.begin()), m_intMenuX, (*itWidget)->getText().c_str());
 }
 
 bool CMenuPage::isOverMenu(void)
 {
-    if((m_intCurrentY > m_intMenuY + m_vWidget.size()) || (m_intCurrentY < m_intMenuY+1))
+    if((m_intCurrentY > m_intMenuY + m_vWidget.size() - 1 ) || (m_intCurrentY < m_intMenuY))
         return TRUE;
     else
         return FALSE;
@@ -71,9 +72,9 @@ void CMenuPage::downMove(void)
     }
     else
     {
-        mvwaddch(myWin, m_intCurrentY, m_intMenuX-1, '#');
-        mvwaddch(myWin, m_intCurrentY-1, m_intMenuX-1, ' ');
-        wrefresh(myWin);
+        mvwaddch(myWin, m_intCurrentY, m_intMenuX-2, '#');
+        mvwaddch(myWin, m_intCurrentY -1, m_intMenuX-2, ' ');
+        show();
     }
 }
 
@@ -86,18 +87,20 @@ void CMenuPage::upMove(void)
     }
     else
     {
-        mvwaddch(myWin, m_intCurrentY, m_intMenuX-1, '#');
-        mvwaddch(myWin, m_intCurrentY+1, m_intMenuX-1, ' ');
-        wrefresh(myWin);
+        mvwaddch(myWin, m_intCurrentY, m_intMenuX-2, '#');
+        mvwaddch(myWin, m_intCurrentY + 1, m_intMenuX-2, ' ');
+        show();
     }
 }
 
 void CMenuPage::rightMove(void)
 {
-
+    m_vWidget.at(m_intCurrentY - m_intMenuY)->rightAction();
+    show();
 }
 
 void CMenuPage::leftMove(void)
 {
-
+    m_vWidget.at(m_intCurrentY - m_intMenuY)->leftAction();
+    show();
 }

@@ -15,22 +15,35 @@ int main(void)
     curs_set(0);
 
     CKeyRead inputKey;
+    CWidget *widget;
 
+    CMenuPage *homePage = new CMenuPage;
+    CWidgetNumber homeNumber;
+    widget = &homeNumber;
+    homeNumber.initWidget("Text menu 1.     ", "20", NULL);
+    homePage->bindNewWidget(widget);
+    CWidgetStatus homeStatus;
+    widget = &homeStatus;
+    widget->initWidget("Text menu 2.      ", "true", NULL);
+    homePage->bindNewWidget(widget);
+
+    homePage->initMenu(60,20);
+    homePage->show();
     while(1)
     {
-//      inputKey.getKey();
-//      if(inputKey.isUp())
-//          pageCtrl.moveUp();
-//      if(inputKey.isDown())
-//          pageCtrl.moveDown();
-//      if(inputKey.isLeft())
-//          pageCtrl.moveLeft();
-//      if(inputKey.isRight())
-//          pageCtrl.moveRight();
-//      if(inputKey.isEnter())
-//          pageCtrl.enterMenu();
-//      if(inputKey.isQuit())
-//          pageCtrl.quitMenu();
+      inputKey.getKey();
+      if(inputKey.isUp())
+          homePage->upMove();
+      if(inputKey.isDown())
+          homePage->downMove();
+      if(inputKey.isLeft())
+          homePage->leftMove();
+      if(inputKey.isRight())
+          homePage->rightMove();
+      if(inputKey.isEnter());
+          //pageCtrl.enterMenu();
+      if(inputKey.isQuit())
+          break;
     }
     return 0;
 }

@@ -4,7 +4,11 @@
 #include <string>
 #include <list>
 #include <vector>
-#include "cwidget.h"
+#include <algorithm>
+#include <QDebug>
+#include <iostream>
+
+class CWidget;
 
 using namespace std;
 
@@ -14,9 +18,7 @@ public:
     CMenuPage();
     void initMenu(int width,int height);
     void bindNewWidget(CWidget *newWidget);
-
     void show(void);
-    void showMenu(void);
     void showWidget(void);
     void upMove(void);
     void downMove(void);

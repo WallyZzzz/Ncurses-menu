@@ -1,6 +1,6 @@
 #include "cmenuctrl.h"
 
-CMenuCtrl::CMenuCtrl() : m_intCurrentMenu(0),m_intMenuPageNum(0)
+CMenuCtrl::CMenuCtrl()
 {
 
 }
@@ -10,58 +10,52 @@ void CMenuCtrl::initMenuCtrl(void)
 
 }
 
-void CMenuCtrl::addMenuPage(CMenuPage *newMenu)
+void CMenuCtrl::setHomePage(CMenuPage *newMenu)
 {
-    m_myMenuP.insert(m_myMenuP.end(),newMenu);
-    ++m_intMenuPageNum;
+    m_pMenuPage = newMenu;
 }
 
 void CMenuCtrl::moveUp(void)
 {
-    m_myMenuP.at(m_intCurrentMenu)->upMove();
+    m_pMenuPage->upMove();
 }
 
 void CMenuCtrl::moveDown(void)
 {
-    m_myMenuP.at(m_intCurrentMenu)->downMove();
+    m_pMenuPage->downMove();
 }
 
 void CMenuCtrl::moveLeft(void)
 {
-    m_myMenuP.at(m_intCurrentMenu)->leftMove();
+    m_pMenuPage->leftMove();
 }
 
 void CMenuCtrl::moveRight(void)
 {
-    m_myMenuP.at(m_intCurrentMenu)->rightMove();
+    m_pMenuPage->rightMove();
 }
 
 void CMenuCtrl::enterMenu(void)
 {
-//    int index = m_myMenuP.at(m_intCurrentMenu)->isNewMenu();
-//    if(index >= 0)
-//    {
-//        preMenu.push(m_myMenuP.at(m_intCurrentMenu));
-//        m_myMenuP.at(m_intCurrentMenu)->clear();
-//        m_intCurrentMenu = index;
+    CMenuPage *index = m_pMenuPage->enterMenu();
+    if(index != NULL)
+    {
+        preMenu.push(m_pMenuPage);
+        m_pMenuPage->clear();
+        m_pMenuPage = index;
 
-//        show();
-//    }
+        show();
+    }
 }
 
 void CMenuCtrl::show(void)
 {
-    m_myMenuP.at(m_intCurrentMenu)->show();
+    m_pMenuPage->show();
 }
 
 void CMenuCtrl::quitMenu(void)
 {
-    vector<CMenuPage*>::iterator index = find(m_myMenuP.begin(), m_myMenuP.end(), preMenu.top());
+    m_pMenuPage = preMenu.top();
     preMenu.pop();
-    if(index - m_myMenuP.begin() >= 0)
-    {
-        m_intCurrentMenu = index - m_myMenuP.begin();
-
-        show();
-    }
+    show();
 }

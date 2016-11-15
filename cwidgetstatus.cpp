@@ -1,11 +1,6 @@
 #include "cwidgetstatus.h"
 
-CWidgetStatus::CWidgetStatus()
-{
-
-}
-
-void CWidgetStatus::initWidget(const string menuName, const string menuWidget, CMenuPage *nextMenu)
+CWidgetStatus::CWidgetStatus(const string menuName, const string menuWidget)
 {
     m_sMenuName = menuName;
     if(menuWidget == "true")

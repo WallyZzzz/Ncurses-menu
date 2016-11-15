@@ -9,10 +9,9 @@ using namespace std;
 class CWidgetStatus : public CWidget
 {
 public:
-    CWidgetStatus();
+    CWidgetStatus(const string menuName, const string menuWidget);
     void leftAction(void);
     void rightAction(void);
-    void initWidget(const string menuName, const string menuString, CMenuPage *nextMenu);
     string getText(void);
     CMenuPage *isNewMenu(void);
 private:

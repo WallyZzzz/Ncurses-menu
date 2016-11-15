@@ -1,11 +1,6 @@
 #include "cwidgetnumber.h"
 
-CWidgetNumber::CWidgetNumber()
-{
-
-}
-
-void CWidgetNumber::initWidget(const string menuName, const string menuWidget, CMenuPage *nextMenu)
+CWidgetNumber::CWidgetNumber(const string menuName, const string menuWidget)
 {
     m_sMenuName = menuName;
     m_intNumber = atoi(menuWidget.c_str());

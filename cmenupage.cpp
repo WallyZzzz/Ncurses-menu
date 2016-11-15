@@ -6,12 +6,7 @@ int CMenuPage::m_intMenuX = 12;
 int CMenuPage::m_intMenuY = 2;
 
 
-CMenuPage::CMenuPage()
-{
-
-}
-
-void CMenuPage::initMenu(int width, int height)
+CMenuPage::CMenuPage(int width, int height)
 {
     m_intWidth = width;
     m_intHeight = height;
@@ -103,4 +98,27 @@ void CMenuPage::leftMove(void)
 {
     m_vWidget.at(m_intCurrentY - m_intMenuY)->leftAction();
     show();
+}
+
+CMenuPage *CMenuPage::enterMenu(void)
+{
+    return m_vWidget.at(m_intCurrentY - m_intMenuY)->isNewMenu();
+}
+
+void CMenuPage::newWidgetMenu(const string menuName, CMenuPage *nextMenu)
+{
+    newWidget = new CWidgetMenu(menuName, nextMenu);
+    bindNewWidget(newWidget);
+}
+
+void CMenuPage::newWidgetNumber(const string menuName, const string menuWidget)
+{
+    newWidget = new CWidgetNumber(menuName, menuWidget);
+    bindNewWidget(newWidget);
+}
+
+void CMenuPage::newWidgetStatus(const string menuName, const string menuWidget)
+{
+    newWidget = new CWidgetStatus(menuName, menuWidget);
+    bindNewWidget(newWidget);
 }

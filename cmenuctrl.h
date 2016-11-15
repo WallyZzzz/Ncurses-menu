@@ -15,7 +15,7 @@ public:
     CMenuCtrl();
     void initMenuCtrl(void);
     void show(void);
-    void addMenuPage(CMenuPage *newMenu);
+    void setHomePage(CMenuPage *newMenu);
     void enterMenu(void);
     void quitMenu(void);
     void moveUp(void);
@@ -23,10 +23,8 @@ public:
     void moveLeft(void);
     void moveRight(void);
 private:
-    vector<CMenuPage*> m_myMenuP;
+    CMenuPage *m_pMenuPage;
     stack<CMenuPage*> preMenu;
-    int m_intMenuPageNum;
-    int m_intCurrentMenu;
 };
 
 #endif // CMENUCTRL_H

@@ -8,10 +8,11 @@ using namespace std;
 class CWidgetMenu : public CWidget
 {
 public:
-    CWidgetMenu();
-    void initWidget(const string menuName, const string menuWidget, CMenuPage *nextMenu);
+    CWidgetMenu(const string menuName, CMenuPage *nextMenu);
     CMenuPage *isNewMenu(void);
     string getText(void);
+    void leftAction(void);
+    void rightAction(void);
 private:
     CMenuPage *m_pNextMenu;
 };

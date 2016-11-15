@@ -6,7 +6,7 @@
 #include "cwidgetstatus.h"
 #include "cwidgetnumber.h"
 #include "cmenuctrl.h"
-
+#include "cwidgetmenu.h"
 
 int main(void)
 {
@@ -15,35 +15,32 @@ int main(void)
     curs_set(0);
 
     CKeyRead inputKey;
-    CWidget *widget;
+    CMenuCtrl menuCtrl;
 
-    CMenuPage *homePage = new CMenuPage;
-    CWidgetNumber homeNumber;
-    widget = &homeNumber;
-    homeNumber.initWidget("Text menu 1.     ", "20", NULL);
-    homePage->bindNewWidget(widget);
-    CWidgetStatus homeStatus;
-    widget = &homeStatus;
-    widget->initWidget("Text menu 2.      ", "true", NULL);
-    homePage->bindNewWidget(widget);
+    CMenuPage *homePage = new CMenuPage(60, 20);
+    CMenuPage *newPage = new CMenuPage(40, 20);
 
-    homePage->initMenu(60,20);
-    homePage->show();
+    homePage->newWidgetNumber("Test menu 1.     ", "20");
+    homePage->newWidgetStatus("Test menu 2.     ", "FALSE");
+    homePage->newWidgetMenu("Test menu 3.     ", newPage);
+
+    menuCtrl.setHomePage(homePage);
+    menuCtrl.show();
     while(1)
     {
       inputKey.getKey();
       if(inputKey.isUp())
-          homePage->upMove();
+          menuCtrl.moveUp();
       if(inputKey.isDown())
-          homePage->downMove();
+          menuCtrl.moveDown();
       if(inputKey.isLeft())
-          homePage->leftMove();
+          menuCtrl.moveLeft();
       if(inputKey.isRight())
-          homePage->rightMove();
-      if(inputKey.isEnter());
-          //pageCtrl.enterMenu();
+          menuCtrl.moveRight();
+      if(inputKey.isEnter())
+          menuCtrl.enterMenu();
       if(inputKey.isQuit())
-          break;
+          menuCtrl.quitMenu();
     }
     return 0;
 }

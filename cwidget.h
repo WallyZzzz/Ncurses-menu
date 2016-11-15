@@ -12,7 +12,6 @@ public:
     CWidget();
     virtual void leftAction(void) = 0;
     virtual void rightAction(void) = 0;
-    virtual void initWidget(const string menuName, const string menuWidget, CMenuPage *nextMenu) = 0;
     virtual string getText(void) = 0;
     virtual CMenuPage *isNewMenu(void) = 0;
 protected:

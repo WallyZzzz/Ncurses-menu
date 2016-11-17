@@ -122,3 +122,8 @@ void CMenuPage::newWidgetStatus(const string menuName, const string menuWidget)
     newWidget = new CWidgetStatus(menuName, menuWidget);
     bindNewWidget(newWidget);
 }
+
+WINDOW *CMenuPage::getWin(void)
+{
+    return myWin;
+}

@@ -2,45 +2,45 @@
 #include <iostream>
 #include "ckeyread.h"
 #include "cmenupage.h"
-#include "cwidget.h"
-#include "cwidgetstatus.h"
-#include "cwidgetnumber.h"
 #include "cmenuctrl.h"
-#include "cwidgetmenu.h"
 
 int main(void)
 {
     initscr();
-    cbreak();
+    setlocale(LC_ALL, "");
+    start_color();
+    init_pair(1, COLOR_RED, COLOR_BLACK);
     curs_set(0);
+    noecho();
+    erase();
+    refresh();
 
     CKeyRead inputKey;
     CMenuCtrl menuCtrl;
 
     CMenuPage *homePage = new CMenuPage(60, 20);
-    CMenuPage *newPage = new CMenuPage(40, 20);
+    CMenuPage *firstPage = new CMenuPage(50, 20);
+    CMenuPage *secondPage = new CMenuPage(40, 20);
+    CMenuPage *thirtPage = new CMenuPage(30, 20);
 
     homePage->newWidgetNumber("Test menu 1.     ", "20");
     homePage->newWidgetStatus("Test menu 2.     ", "FALSE");
-    homePage->newWidgetMenu("Test menu 3.     ", newPage);
+    homePage->newWidgetMenu("Test menu 3.     ", firstPage);
+
+    firstPage->newWidgetStatus("Test menu 2-1.  ", "FALSE");
+    firstPage->newWidgetNumber("Test menu 2-2   ", "50");
+    firstPage->newWidgetNumber("Test menu 2-3.  ", "40");
+    firstPage->newWidgetMenu("Test menu 2-4.  ", secondPage);
+
+    secondPage->newWidgetMenu("Test menu 3-1.  ", thirtPage);
 
     menuCtrl.setHomePage(homePage);
     menuCtrl.show();
     while(1)
     {
-      inputKey.getKey();
-      if(inputKey.isUp())
-          menuCtrl.moveUp();
-      if(inputKey.isDown())
-          menuCtrl.moveDown();
-      if(inputKey.isLeft())
-          menuCtrl.moveLeft();
-      if(inputKey.isRight())
-          menuCtrl.moveRight();
-      if(inputKey.isEnter())
-          menuCtrl.enterMenu();
-      if(inputKey.isQuit())
-          menuCtrl.quitMenu();
+        inputKey.getKey(menuCtrl.currentPage());
+        menuCtrl.readKey(inputKey.readKey());
     }
+    endwin();
     return 0;
 }

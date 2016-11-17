@@ -59,3 +59,22 @@ void CMenuCtrl::quitMenu(void)
     preMenu.pop();
     show();
 }
+
+WINDOW *CMenuCtrl::currentPage(void)
+{
+    m_pMenuPage->getWin();
+}
+
+void CMenuCtrl::readKey(char key)
+{
+    switch(key)
+    {
+    case keyUp : moveUp();break;
+    case keyDown:moveDown();break;
+    case keyLeft:moveLeft();break;
+    case keyRight:moveRight();break;
+    case keyEnter:enterMenu();break;
+    case keyQuit:quitMenu();break;
+    default:break;
+    }
+}

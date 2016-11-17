@@ -5,7 +5,7 @@
 #include "cmenupage.h"
 #include <stack>
 #include <algorithm>
-#include <QDebug>
+#include "ckeyread.h"
 
 using namespace std;
 
@@ -22,6 +22,8 @@ public:
     void moveDown(void);
     void moveLeft(void);
     void moveRight(void);
+    WINDOW *currentPage(void);
+    void readKey(char key);
 private:
     CMenuPage *m_pMenuPage;
     stack<CMenuPage*> preMenu;

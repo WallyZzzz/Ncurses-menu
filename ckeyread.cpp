@@ -1,75 +1,41 @@
 #include "ckeyread.h"
 
-CKeyRead::CKeyRead() : m_strUpKey('k'),
-    m_strDownKey('j'),
-    m_strLeftKey('h'),
-    m_strRightKey('l'),
-    m_strQuitKey('q'),
-    m_strEnterKey('n'),
-    m_strReadKey(' ')
+CKeyRead::CKeyRead()
 {
 
 }
 
-void CKeyRead::initKeyRead(void)
+void CKeyRead::getKey(WINDOW *win)
 {
-
+    keypad(win, TRUE);
+    m_intReadKey = wgetch(win);
 }
 
-void CKeyRead::getKey(void)
+char CKeyRead::readKey(void)
 {
-    m_strReadKey = getchar();
+    switch(m_intReadKey)
+    {
+    case KEY_UP:
+    case 'k':return keyUp;
+
+    case KEY_DOWN:
+    case 'j':return keyDown;
+
+    case KEY_LEFT:
+    case 'h':return keyLeft;
+
+    case KEY_RIGHT:
+    case 'l':return keyRight;
+
+    case 10:
+    case 'n':return keyEnter;
+
+    case 27:                         //27 = esc
+    case 'q':return keyQuit;
+
+    default:return -1;
+    }
 }
 
-void CKeyRead::sendKey(void)
-{
 
-}
 
-bool CKeyRead::isUp(void)
-{
-    if(m_strReadKey == m_strUpKey)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool CKeyRead::isDown(void)
-{
-    if(m_strReadKey == m_strDownKey)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool CKeyRead::isLeft(void)
-{
-    if(m_strReadKey == m_strLeftKey)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool CKeyRead::isRight(void)
-{
-    if(m_strReadKey == m_strRightKey)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool CKeyRead::isQuit(void)
-{
-    if(m_strReadKey == m_strQuitKey)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool CKeyRead::isEnter(void)
-{
-    if(m_strReadKey == m_strEnterKey)
-        return TRUE;
-    else
-        return FALSE;
-}

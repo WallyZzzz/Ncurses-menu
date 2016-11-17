@@ -33,6 +33,7 @@ public:
     void newWidgetMenu(const string menuName, CMenuPage *nextMenu);
     void newWidgetStatus(const string menuName, const string menuWidget);
     void newWidgetNumber(const string menuName, const string menuWidget);
+    WINDOW *getWin(void);
 private:
     vector<CWidget*> m_vWidget;
     int m_intWidth;
@@ -40,10 +41,10 @@ private:
     int m_intStartX;
     int m_intStartY;
     int m_intCurrentY;
-    WINDOW *myWin;
     static int m_intMenuX;
     static int m_intMenuY;
     CWidget *newWidget;
+    WINDOW *myWin;
 };
 
 #endif // CMENUPAGE_H
